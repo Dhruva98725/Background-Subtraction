@@ -89,11 +89,9 @@ def mean_filtering(video_path):
         if cv2.waitKey(1) & 0xFF == 27:
             break
 
-
     cap.release()
 
     cv2.destroyAllWindows()		
-
 
 def running_average(video_path):
     def nothing(x):
