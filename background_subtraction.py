@@ -74,7 +74,6 @@ def gaussian_mixture_background_subtraction(video_path):
     def norm_pdf(x, mean, sigma):
         return (1 / (np.sqrt(2 * np.pi) * sigma)) * (np.exp(-0.5 * (((x - mean) / sigma) ** 2)))
 
-
     # Initialize the video capture
     cap = cv2.VideoCapture(video_path)
     # cap = cv2.VideoCapture('thunder.mp4')  # Uncomment to use different videos
@@ -299,8 +298,6 @@ def median_background_estimation(video_path):
 
     cap.release()
     cv2.destroyAllWindows()
-
-
 
 # Main execution
 if __name__ == "__main__":
