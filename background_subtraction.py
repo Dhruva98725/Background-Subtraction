@@ -76,8 +76,6 @@ def gaussian_mixture_background_subtraction(video_path):
 
     # Initialize the video capture
     cap = cv2.VideoCapture(video_path)
-    # cap = cv2.VideoCapture('thunder.mp4')  # Uncomment to use different videos
-    # cap = cv2.VideoCapture('thunder2.mp4')
 
     # Read the first frame and convert to grayscale
     _, frame = cap.read()
