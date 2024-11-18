@@ -44,7 +44,9 @@ def frame_differencing(video_path):
         if cv2.waitKey(delay) & 0xFF == 27:
             break
 
+
     cap.release()
+    
     cv2.destroyAllWindows()
 
 def mean_filtering(video_path):
@@ -52,7 +54,7 @@ def mean_filtering(video_path):
         pass
 
     cap = cv2.VideoCapture(video_path)
-    # cap = cv2.VideoCapture('thunder.mp4')
+
     images = []
 
     cv2.namedWindow('tracker')
@@ -88,6 +90,7 @@ def mean_filtering(video_path):
 
         if cv2.waitKey(1) & 0xFF == 27:
             break
+
 
     cap.release()
 
@@ -148,7 +151,9 @@ def running_average(video_path):
         if cv2.waitKey(delay) & 0xFF == 27:
             break
 
+
     cap.release()
+
     cv2.destroyAllWindows()
 
 # Main execution
