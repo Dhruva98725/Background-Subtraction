@@ -27,7 +27,9 @@ def frame_differencing(video_path):
     while True:
         ret, image2 = cap.read()
         if not ret:
-            break
+            print("Error: Unable to read the current frame from the video.")
+            cap.release()
+            return
 
         image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
         min_val = cv2.getTrackbarPos('Min Value', 'Difference')
@@ -46,7 +48,7 @@ def frame_differencing(video_path):
 
 
     cap.release()
-    
+
     cv2.destroyAllWindows()
 
 def mean_filtering(video_path):
@@ -54,6 +56,9 @@ def mean_filtering(video_path):
         pass
 
     cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print(f"Error: Could not open video file: {video_path}")
+        return
 
     images = []
 
@@ -61,6 +66,11 @@ def mean_filtering(video_path):
     cv2.createTrackbar('val','tracker',50,255,nothing)
     while True:
         ret,frame = cap.read()
+        if not ret:
+            print("Error: Unable to read the current frame from the video.")
+            cap.release()
+            return
+
         cv2.imshow('image',frame)
         dim = (500,500)
         frame = cv2.resize(frame,dim,interpolation = cv2.INTER_AREA) 
@@ -78,7 +88,6 @@ def mean_filtering(video_path):
         image = np.mean(image,axis=0)
         image = image.astype(np.uint8)
         cv2.imshow('background',image)
-        image = image.astype(np.uint8)
         # foreground will be background - curr frame
         foreground_image = cv2.absdiff(frame_gray,image)
 
@@ -102,6 +111,9 @@ def running_average(video_path):
 
     # Video capture
     cap = cv2.VideoCapture(video_path)  # Use 'thunder2.mp4' if needed
+    if not cap.isOpened():
+        print(f"Error: Could not open video file: {video_path}")
+        return
 
     # Create trackbar window
     cv2.namedWindow('tracker')
@@ -110,6 +122,11 @@ def running_average(video_path):
 
     # Initialize background model
     ret, frame = cap.read()
+    if not ret:
+        print("Error: Unable to read the first frame from the video.")
+        cap.release()
+        return
+
     dim = (500, 500)
     frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
     frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -120,9 +137,11 @@ def running_average(video_path):
 
     while True:
         ret, frame = cap.read()
-        
         if not ret:
-            break
+            print("Error: Unable to read the current frame from the video.")
+            cap.release()
+            return
+
 
         # Resize the frame to 500x500 for easier processing
         frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
