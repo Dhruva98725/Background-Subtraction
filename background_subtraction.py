@@ -92,7 +92,6 @@ def mean_filtering(video_path):
         foreground_image = cv2.absdiff(frame_gray,image)
 
         a = np.array([0],np.uint8)
-        b = np.array([255],np.uint8)
 
         img = np.where(foreground_image>val,frame_gray,a)
         cv2.imshow('foreground',img)
@@ -110,7 +109,7 @@ def running_average(video_path):
         pass
 
     # Video capture
-    cap = cv2.VideoCapture(video_path)  # Use 'thunder2.mp4' if needed
+    cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
         print(f"Error: Could not open video file: {video_path}")
         return
@@ -133,7 +132,7 @@ def running_average(video_path):
     background = frame_gray.astype(np.float32)
 
     fps = cap.get(cv2.CAP_PROP_FPS)
-    delay = int(1000 / fps) if fps > 0 else 30  # Default to 30ms if FPS is invalid
+    delay = int(1000 / fps) if fps > 0 else 30
 
     while True:
         ret, frame = cap.read()
